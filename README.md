@@ -1,4 +1,4 @@
-# @yveyveskaufmann/kafkajs-azure-oauth-bearer-provider - OAuth2.0 authentication with Azure EventHub.
+# @yveskaufmann/kafkajs-azure-oauth-bearer-provider - OAuth2.0 authentication with Azure EventHub.
 
 OAuth Bearer Provider for kafkajs clients, requests access token from a entry identity OAuth server.
 
