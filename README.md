@@ -5,7 +5,7 @@ OAuth Bearer Provider for kafkajs clients, requests access token from a entry id
 ## Installation
 
 ```sh
-npm install @yveyveskaufmann/kafkajs-azure-oauth-bearer-provider
+npm install @yveskaufmann/kafkajs-azure-oauth-bearer-provider
 ```
 
 ## Usage
