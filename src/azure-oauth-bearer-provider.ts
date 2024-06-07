@@ -79,7 +79,9 @@ export class AzureOAuthBearerProvider {
    * @returns The OAuth bearer token.
    */
   public async getBearerToken(): Promise<OauthbearerProviderResponse> {
-    const tokenEnvelope = await this.credentials.getToken(`https://${this.options.namespace}.servicebus.windows.net`);
+    const tokenEnvelope = await this.credentials.getToken(
+      `https://${this.options.namespace}.servicebus.windows.net/.default`
+    );
     return {
       value: tokenEnvelope.token,
     };

@@ -64,7 +64,7 @@ describe('AzureOAuthBearerProvider', () => {
       const token = await azureOAuthProvider.getBearerToken();
       expect(token).toEqual({ value: 'dummy-token' });
 
-      expect(getTokenMock).toHaveBeenCalledWith('https://my-namespace.servicebus.windows.net');
+      expect(getTokenMock).toHaveBeenCalledWith('https://my-namespace.servicebus.windows.net/.default');
     });
   });
 });
