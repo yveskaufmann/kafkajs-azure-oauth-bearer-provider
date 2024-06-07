@@ -1,6 +1,6 @@
 {
   "name": "@yveskaufmann/kafkajs-azure-oauth-bearer-provider",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "OAuthBearerProvider for kafkajs",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
