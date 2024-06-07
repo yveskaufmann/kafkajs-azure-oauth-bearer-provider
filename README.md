@@ -1,5 +1,8 @@
 # @yveskaufmann/kafkajs-azure-oauth-bearer-provider - OAuth2.0 authentication with Azure EventHub.
 
+[![npm version](https://badge.fury.io/js/@yveskaufmann%2Fkafkajs-azure-oauth-bearer-provider.svg)](https://badge.fury.io/js/@yveskaufmann%2Fkafkajs-azure-oauth-bearer-provider)
+[![Node.js CI](https://github.com/yveskaufmann/kafkajs-azure-oauth-bearer-provider/actions/workflows/ci.yml/badge.svg)](https://github.com/yveskaufmann/kafkajs-azure-oauth-bearer-provide/actions/workflows/ci.yml)
+
 OAuth Bearer Provider for kafkajs clients, requests access token from a entry identity OAuth server.
 
 ## Installation
