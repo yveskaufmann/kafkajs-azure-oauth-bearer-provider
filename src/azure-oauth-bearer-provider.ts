@@ -9,6 +9,13 @@ export interface AzureOAuthBearerProviderOptions {
    * The namespace of the EventHub. This is optional, and it can be provided as the environment variable EVENTHUB_NAMESPACE.
    */
   namespace?: string;
+
+  /**
+   * An optional error handler that can be used to handle errors that occur when getting the OAuth bearer token from Azure.
+   *
+   * @param error - The error that occurred.
+   */
+  errorHandler?: (error: Error) => void;
 }
 
 /**
@@ -79,11 +86,19 @@ export class AzureOAuthBearerProvider {
    * @returns The OAuth bearer token.
    */
   public async getBearerToken(): Promise<OauthbearerProviderResponse> {
-    const tokenEnvelope = await this.credentials.getToken(
-      `https://${this.options.namespace}.servicebus.windows.net/.default`
-    );
-    return {
-      value: tokenEnvelope.token,
-    };
+    try {
+      const tokenEnvelope = await this.credentials.getToken(
+        `https://${this.options.namespace}.servicebus.windows.net/.default`
+      );
+      return {
+        value: tokenEnvelope.token,
+      };
+    } catch (error) {
+      if (this.options.errorHandler) {
+        this.options.errorHandler(error as Error);
+      } else {
+        throw error;
+      }
+    }
   }
 }

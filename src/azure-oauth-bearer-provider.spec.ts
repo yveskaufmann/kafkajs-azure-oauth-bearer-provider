@@ -66,5 +66,28 @@ describe('AzureOAuthBearerProvider', () => {
 
       expect(getTokenMock).toHaveBeenCalledWith('https://my-namespace.servicebus.windows.net/.default');
     });
+
+    it('should throw an error if the token request fails and no error handler was configured', async () => {
+      const azureOAuthProvider = new AzureOAuthBearerProvider({
+        namespace: 'my-namespace',
+      });
+
+      getTokenMock.mockRejectedValue(new Error('token-error'));
+
+      await expect(azureOAuthProvider.getBearerToken()).rejects.toThrow('token-error');
+    });
+
+    it('should call the error handler if the token request fails', async () => {
+      const errorHandler = jest.fn();
+      const azureOAuthProvider = new AzureOAuthBearerProvider({
+        namespace: 'my-namespace',
+        errorHandler,
+      });
+
+      getTokenMock.mockRejectedValue(new Error('token-error'));
+
+      await azureOAuthProvider.getBearerToken();
+      expect(errorHandler).toHaveBeenCalledWith(new Error('token-error'));
+    });
   });
 });

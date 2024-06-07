@@ -3,7 +3,9 @@
 [![npm version](https://badge.fury.io/js/@yveskaufmann%2Fkafkajs-azure-oauth-bearer-provider.svg)](https://badge.fury.io/js/@yveskaufmann%2Fkafkajs-azure-oauth-bearer-provider)
 [![Node.js CI](https://github.com/yveskaufmann/kafkajs-azure-oauth-bearer-provider/actions/workflows/ci.yml/badge.svg)](https://github.com/yveskaufmann/kafkajs-azure-oauth-bearer-provide/actions/workflows/ci.yml)
 
-OAuth Bearer Provider for kafkajs clients, requests access token by leveraging [DefaultAzureCredentials](https://learn.microsoft.com/en-us/javascript/api/overview/azure/identity-readme?view=azure-node-latest#defaultazurecredential) to gain access to Azure Event Hub via kafkajs.  
+OAuth Bearer Provider for kafkajs clients, requests access token by leveraging
+[DefaultAzureCredentials](https://learn.microsoft.com/en-us/javascript/api/overview/azure/identity-readme?view=azure-node-latest#defaultazurecredential)
+to gain access to Azure Event Hub via kafkajs.
 
 ## Installation
 
@@ -13,12 +15,13 @@ npm install @yveskaufmann/kafkajs-azure-oauth-bearer-provider
 
 ## Usage
 
-Now use the provider to configure the kafkajs client for authenticate against Azure Event Hubs by using OAuth 2.0.
-The provider will use the existing [DefaultAzureCredentials](https://learn.microsoft.com/en-us/javascript/api/overview/azure/identity-readme?view=azure-node-latest#defaultazurecredential).
+Now use the provider to configure the kafkajs client for authenticate against Azure Event Hubs by using OAuth 2.0. The
+provider will use the existing
+[DefaultAzureCredentials](https://learn.microsoft.com/en-us/javascript/api/overview/azure/identity-readme?view=azure-node-latest#defaultazurecredential).
 
 ```ts
 const azureOAuthProvider = new AzureOAuthBearerProvider({
-  namespace: '<event-hub-namespace>'
+  namespace: '<event-hub-namespace>',
 });
 const kafka = new Kafka({
   clientId: 'my-app',
@@ -27,11 +30,12 @@ const kafka = new Kafka({
   ssl: true,
 });
 ```
-## Usage with AKS and Managed Identities 
+
+## Usage with AKS and Managed Identities
 
 1. Create a service account and annotate it with `azure.workload.identity/client-id=<client-id>`
 2. Reference the service account within your deployment
-3. Label your deployment pod template with `azure.workload.identity/use=true` 
+3. Label your deployment pod template with `azure.workload.identity/use=true`
 
 ## API Reference
 
@@ -51,6 +55,13 @@ export interface AzureOAuthBearerProviderOptions {
    * The namespace of the EventHub. This is optional, and it can be provided as the environment variable EVENTHUB_NAMESPACE.
    */
   namespace?: string;
+
+  /**
+   * An optional error handler that can be used to handle errors that occur when getting the OAuth bearer token from Azure.
+   *
+   * @param error - The error that occurred.
+   */
+  errorHandler?: (error: Error) => void;
 }
 ```
 
