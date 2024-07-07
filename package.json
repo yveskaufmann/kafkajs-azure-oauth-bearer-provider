@@ -21,7 +21,7 @@
   "author": "Yves Kaufmann",
   "license": "MIT",
   "dependencies": {
-    "@azure/identity": "^4.2.0"
+    "@azure/identity": "^4.3.0"
   },
   "peerDependencies": {
     "kafkajs": ">=2.0.0"
