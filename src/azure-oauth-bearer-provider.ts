@@ -1,5 +1,5 @@
 import { DefaultAzureCredential } from '@azure/identity';
-import { OauthbearerProviderResponse, SASLMechanismOptions } from 'kafkajs';
+import type { OauthbearerProviderResponse, SASLMechanismOptions } from 'kafkajs';
 
 /**
  * Options for AzureOAuthBearerProvider

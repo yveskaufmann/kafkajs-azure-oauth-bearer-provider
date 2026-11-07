@@ -30,11 +30,17 @@ test-watch:
 	$(MAKE) test TEST_ARGS=--watch
 
 .PHONY: lint
-lint:
-	npx eslint -c .eslintrc.js .
+lint: node_modules
+	npx biome lint .
 
 .PHONY: lint-fix
-lint-fix:
-	npx eslint --fix -c .eslintrc.js .
+lint-fix: node_modules
+	npx biome lint --write .
 
+.PHONY: format
+format: node_modules
+	npx biome format --write .
 
+.PHONY: format-check
+format-check: node_modules
+	npx biome format .
