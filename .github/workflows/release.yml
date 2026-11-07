@@ -10,14 +10,13 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     permissions:
-      contents: write # to be able to publish a GitHub release
-      issues: write # to be able to comment on released issues
-      pull-requests: write # to be able to comment on released pull requests
-      id-token: write # to enable use of OIDC for npm provenance
-
+      contents: write     
+      issues: write
+      pull-requests: write 
+      id-token: write
     steps:
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
         with:
           node-version-file: ".nvmrc"
@@ -27,6 +26,5 @@ jobs:
       - name: Release
         run: npx semantic-release
         env:
-          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
