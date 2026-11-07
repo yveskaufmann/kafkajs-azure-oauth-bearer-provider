@@ -1,6 +1,10 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.6.6/schema.json",
-  "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
   "files": {
     "includes": [
       "**",
@@ -14,38 +18,46 @@
     ]
   },
   "formatter": {
-    "enabled": true,
     "useEditorconfig": true,
     "lineWidth": 120
   },
   "javascript": {
     "formatter": {
       "quoteStyle": "single",
-      "semicolons": "always",
-      "trailingCommas": "es5",
-      "arrowParentheses": "always",
-      "bracketSpacing": true,
-      "quoteProperties": "asNeeded"
+      "trailingCommas": "es5"
     }
   },
   "assist": {
     "enabled": true,
-    "actions": { "source": { "organizeImports": "on" } }
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
   },
   "linter": {
     "enabled": true,
     "rules": {
-      "complexity": { "noUselessSwitchCase": "off" },
+      "complexity": {
+        "noUselessSwitchCase": "off"
+      },
       "correctness": {
         "noUnusedVariables": {
           "level": "error",
-          "options": { "ignoreRestSiblings": true }
+          "options": {
+            "ignoreRestSiblings": true
+          }
         },
         "noUnusedFunctionParameters": "off"
       },
       "style": {
         "useConst": "error",
-        "useFilenamingConvention": { "level": "error", "options": { "filenameCases": ["kebab-case"] } }
+        "useFilenamingConvention": {
+          "level": "error",
+          "options": {
+            "filenameCases": ["kebab-case"]
+          }
+        }
       },
       "suspicious": {
         "noExplicitAny": "off",
