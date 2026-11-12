@@ -1,17 +1,25 @@
-import { replaceProperty } from 'jest-mock';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { AzureOAuthBearerProvider } from './azure-oauth-bearer-provider';
 
-const getTokenMock = jest.fn().mockResolvedValue({ token: 'dummy-token', expiresOnTimestamp: 1234567890 });
-jest.mock('@azure/identity', () => ({
-  DefaultAzureCredential: jest.fn().mockImplementation(() => ({
-    getToken: getTokenMock,
-  })),
+// vi.mock is hoisted above all imports, so the mock fn it references must be hoisted too.
+const { getTokenMock } = vi.hoisted(() => ({
+  getTokenMock: vi.fn().mockResolvedValue({ token: 'dummy-token', expiresOnTimestamp: 1234567890 }),
+}));
+vi.mock('@azure/identity', () => ({
+  // A class rather than vi.fn(() => ...): the provider instantiates it with `new`, which arrow-function mocks reject.
+  DefaultAzureCredential: class {
+    getToken = getTokenMock;
+  },
 }));
 
 describe('AzureOAuthBearerProvider', () => {
   beforeEach(() => {
     process.env.EVENTHUB_NAMESPACE = '';
+  });
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
   });
 
   describe('brokers', () => {
@@ -21,7 +29,7 @@ describe('AzureOAuthBearerProvider', () => {
     });
 
     it('should provide the list of brokers (read ns from env.EVENTHUB_NAMESPACE)', () => {
-      replaceProperty(process.env, 'EVENTHUB_NAMESPACE', 'my-namespace');
+      vi.stubEnv('EVENTHUB_NAMESPACE', 'my-namespace');
 
       const azureOAuthProvider = new AzureOAuthBearerProvider();
       expect(azureOAuthProvider.brokers).toEqual(['my-namespace.servicebus.windows.net:9093']);
@@ -38,9 +46,7 @@ describe('AzureOAuthBearerProvider', () => {
   describe('saslOptions', () => {
     it('should provide the SASL options to authenticate again eventhub', async () => {
       const azureOAuthProvider = new AzureOAuthBearerProvider({ namespace: 'my-namespace' });
-      const spyGetBearerToken = jest
-        .spyOn(azureOAuthProvider, 'getBearerToken')
-        .mockResolvedValue({ value: 'my-token' });
+      const spyGetBearerToken = vi.spyOn(azureOAuthProvider, 'getBearerToken').mockResolvedValue({ value: 'my-token' });
 
       const saslOptions = azureOAuthProvider.saslOptions;
       expect(saslOptions).toEqual({
@@ -78,7 +84,7 @@ describe('AzureOAuthBearerProvider', () => {
     });
 
     it('should call the error handler if the token request fails', async () => {
-      const errorHandler = jest.fn();
+      const errorHandler = vi.fn();
       const azureOAuthProvider = new AzureOAuthBearerProvider({
         namespace: 'my-namespace',
         errorHandler,
