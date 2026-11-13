@@ -14,7 +14,7 @@ endif
 clean:
 	rm -rf dist
 
-node_modules: package.json package-lock.json
+node_modules: package.json
 ifeq ($(CI), true)
 	npm ci
 else
