@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { AzureOAuthBearerProvider } from './azure-oauth-bearer-provider';
+import { AzureOAuthBearerProvider } from './azure-oauth-bearer-provider.js';
 
 // vi.mock is hoisted above all imports, so the mock fn it references must be hoisted too.
 const { getTokenMock } = vi.hoisted(() => ({
