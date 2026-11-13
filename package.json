@@ -2,9 +2,15 @@
   "name": "@yveskaufmann/kafkajs-azure-oauth-bearer-provider",
   "version": "1.0.1",
   "description": "OAuthBearerProvider for kafkajs",
+  "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "typings": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
   "publishConfig": {
     "access": "public"
   },

@@ -1,1 +1,1 @@
-export * from './azure-oauth-bearer-provider';
+export * from './azure-oauth-bearer-provider.js';
