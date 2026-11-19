@@ -38,7 +38,7 @@
     "@vitest/coverage-v8": "5.1.0",
     "kafkajs": "^2.2.4",
     "nodemon": "^3.1.14",
-    "semantic-release": "^25.0.9",
+    "semantic-release": "^26.0.1",
     "ts-node": "^10.9.2",
     "typescript": "7.0.2",
     "vitest": "5.1.0"
