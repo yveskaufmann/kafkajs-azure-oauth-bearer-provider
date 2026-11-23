@@ -35,13 +35,13 @@
   "devDependencies": {
     "@biomejs/biome": "2.6.8",
     "@types/node": "^26.6.6",
-    "@vitest/coverage-v8": "5.1.0",
+    "@vitest/coverage-v8": "5.1.1",
     "kafkajs": "^2.2.4",
     "nodemon": "^3.1.14",
     "semantic-release": "^26.0.1",
     "ts-node": "^10.9.2",
     "typescript": "7.0.2",
-    "vitest": "5.1.0"
+    "vitest": "5.1.1"
   },
   "repository": {
     "type": "git",
